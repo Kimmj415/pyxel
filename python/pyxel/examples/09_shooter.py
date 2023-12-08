@@ -186,6 +186,8 @@ class Blast:
 class App:
     def __init__(self):
         pyxel.init(120, 160, title="Pyxel Shooter")
+        pyxel.image(1).load(0, 0, "./assets/click_enter.png")
+        pyxel.image(2).load(0, 0, "./assets/game_over.png")
         pyxel.image(0).set(
             0,
             0,
@@ -319,7 +321,9 @@ class App:
 
     def draw_title_scene(self):
         pyxel.text(35, 66, "Pyxel Shooter", pyxel.frame_count % 16)
-        pyxel.text(31, 126, "- PRESS ENTER -", 13)
+        # pyxel.text(31, 126, "- PRESS ENTER -", 13)
+        pyxel.blt(15, 126, 1, 0, 0, 256, 256)
+    
 
     def draw_play_scene(self):
         self.player.draw()
@@ -331,8 +335,10 @@ class App:
         draw_list(bullets)
         draw_list(enemies)
         draw_list(blasts)
-        pyxel.text(43, 66, "GAME OVER", 8)
-        pyxel.text(31, 126, "- PRESS ENTER -", 13)
+        # pyxel.text(43, 66, "GAME OVER", 8)
+        pyxel.blt(36, 66, 2, 0, 0, 256, 256)
+        # pyxel.text(31, 126, "- PRESS ENTER -", 13)
+        pyxel.blt(15, 126, 1, 0, 0, 256, 256)
 
 
 App()
