@@ -224,6 +224,7 @@ class App:
         self.score = 0
         self.background = Background()
         self.player = Player(pyxel.width / 2, pyxel.height - 20)
+        self.records = []
         pyxel.playm(0, loop=True)
         pyxel.run(self.update, self.draw)
 
@@ -281,6 +282,8 @@ class App:
                 pyxel.play(3, 1)
                 self.scene = SCENE_GAMEOVER
                 pyxel.playm(0, loop=True)
+                self.records.append(self.score)
+                self.records.sort(reverse=True)
 
         self.player.update()
         update_list(bullets)
@@ -336,9 +339,14 @@ class App:
         draw_list(enemies)
         draw_list(blasts)
         # pyxel.text(43, 66, "GAME OVER", 8)
-        pyxel.blt(36, 66, 2, 0, 0, 256, 256)
+        pyxel.blt(36, 66, 2, 0, 0, 50, 15)
         # pyxel.text(31, 126, "- PRESS ENTER -", 13)
-        pyxel.blt(15, 126, 1, 0, 0, 256, 256)
+        pyxel.blt(15, 126, 1, 0, 0, 100, 15)
+        
+        for i, score in enumerate(self.records):
+            y_offset = 30 + (pyxel.FONT_HEIGHT + 2) * i
+            text = f"{i:02}: {score:020}"
+            pyxel.text(13, y_offset, text, 10)
 
 
 App()
